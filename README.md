@@ -53,3 +53,13 @@ A survey cell is analyzed only if it has ≥5% FTW cropland within **each** of t
 - Set `s3_url_style='path'` in DuckDB (the bucket name contains dots).
 - This release had no per-field confidence values for these states.
 - Simplifying 10 m polygons at 5 m removes stair-stepping that inflates perimeters by ~6%.
+
+## Peer-review revision analyses
+Added in response to review (all results in `results/review/`, Tables S4–S6, Figure 5):
+- `data/derived/worldcover_composition.csv`: ESA WorldCover 2021 cover fractions (tree, shrub, grass, crop, built, bare, water, wetland; semi-natural sum) at 1/2/3 km for all 34,939 cells (Zanaga et al. 2022, CC-BY 4.0). Produced by `worldcover_composition.py`.
+- `data/derived/obs/`: record-level tables (positional accuracy, projected coordinates, anonymized visit IDs) and FTW metrics at each record's own location (records ≤100 m accuracy). Produced by `cornbelt_precise.py` (Corn Belt) and the same metric code for NY–PA.
+- `reviewer_sensitivity.py`: blocked SEs, Moran's I, list length, focal recorders, single-year boundaries.
+- `composition_models.py`: land-cover covariates and VIFs.
+- `obs_coordinate_models.py`: positional-accuracy subsets, observation-coordinate metrics, matched comparison, accuracy + composition.
+
+To rerun: `cd scripts && python setup_review_layout.py` (builds the working folders from the repository data), then run the scripts above (each takes an output folder argument; `obs_coordinate_models.py` functions `matched_comparison`, `accuracy_subsets`, and `accurate_with_composition` write the Table S6 inputs).
