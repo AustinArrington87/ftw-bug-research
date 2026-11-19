@@ -6,6 +6,7 @@ numpy
 pyarrow
 duckdb>=1.0
 requests
+rasterio
 scipy
 statsmodels
 matplotlib
